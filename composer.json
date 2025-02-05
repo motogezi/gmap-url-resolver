@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MotoGezi\\GmapUrlResolver\\": "src/"
+        }
+    },
+    "require": {
+        "laravel/framework": ">=9",
+        "richarddobron/google-maps-data-parameter-parser": "^1.0"
+    }
+}
