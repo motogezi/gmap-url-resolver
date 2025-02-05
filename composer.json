@@ -1,11 +1,24 @@
 {
+    "name": "motogezi/gmap-url-resolver",
+    "description": "A package for resolving Google Maps URLs.",
+    "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MotoGezi\\GmapUrlResolver\\": "src/"
+            "MotoGezi\\GmapUrlResolver\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "require": {
         "laravel/framework": ">=9",
         "richarddobron/google-maps-data-parameter-parser": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.9"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
     }
 }
