@@ -49,6 +49,7 @@ class UrlResolverTest extends TestCase
             ['https://goo.gl/maps/jY9XRRZM3S2Er9pR8'], // Multiple location names + data
             ['https://maps.app.goo.gl/v71vrnB8MWb4MTzc9'], // New URL format
             ['https://bit.ly/35q0vg7'], // Bit.ly
+            ['https://bit.ly/2F8g81b'], // Bit.ly -> geocode format
 //            ['https://tinyurl.com/3x9z5z3u'], // TinyURL
 //            ['https://is.gd/2Z7Z2'], // is.gd
 //            ['https://cutt.ly/2Z7Z2'], // cutt.ly

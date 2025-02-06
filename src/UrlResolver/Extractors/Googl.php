@@ -12,7 +12,8 @@ class Googl implements ShortUrlExtractor
     {
         $oldUrl = preg_match('#^https://goo\.gl/maps/[a-zA-Z\d]+$#', $url);
         $newUrl = preg_match('#^https://maps\.app\.goo\.gl/[a-zA-Z\d]+$#', $url);
-        if (! $oldUrl && ! $newUrl) {
+        $geoCodeUrl = preg_match('#^https://(?:www.)?google\.com/maps\?geocode=.+$#', $url);
+        if (! $oldUrl && ! $newUrl && ! $geoCodeUrl) {
             return null;
         }
 
@@ -38,7 +39,7 @@ class Googl implements ShortUrlExtractor
             throw new UrlResolverException('This is not a direction URL, but a place: ' . $url);
         }
 
-        // Almanya'da cookie consent sayfası çıkıyor.
+        // Almanya'da cookie consent sayfası çıkıyor. -> Bununla baş edemedik, en son Google Cloud Run ile amerikadan çağırıyoruz.
         if (preg_match('#value="(https://www.google.com/maps/dir/.+?)">#', $response->body(), $match)) {
             return $match[1];
         }
