@@ -43,6 +43,10 @@ class Googl implements ShortUrlExtractor
         if (preg_match('#value="(https://www.google.com/maps/dir/.+?)">#', $response->body(), $match)) {
             return $match[1];
         }
+        // CloudRun'dan gelince CAPTCHA çıkartıyor.
+        if (preg_match('#<title>(https://www.google.com/maps/dir/.+?)</title>#', $response->body(), $match)) {
+            return $match[1];
+        }
 
         Log::error('Cannot resolve URL', ['url' => $url, 'response' => $response->body()]);
         throw new UrlResolverException('Invalid full url. Directions not found.');
