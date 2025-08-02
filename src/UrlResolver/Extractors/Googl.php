@@ -10,7 +10,7 @@ class Googl implements ShortUrlExtractor
 {
     public function resolve(string $url): ?string
     {
-        $oldUrl = preg_match('#^https://goo\.gl/maps/[a-zA-Z\d]+$#', $url);
+        $oldUrl = preg_match('#^https://goo\.gl/maps/[a-zA-Z\d]+$#', $url); // Will be removed in 2025 Aug.
         $newUrl = preg_match('#^https://maps\.app\.goo\.gl/[a-zA-Z\d]+$#', $url);
         $geoCodeUrl = preg_match('#^https://(?:www.)?google\.com/maps\?geocode=.+$#', $url);
         if (! $oldUrl && ! $newUrl && ! $geoCodeUrl) {
@@ -40,11 +40,11 @@ class Googl implements ShortUrlExtractor
         }
 
         // Almanya'da cookie consent sayfası çıkıyor. -> Bununla baş edemedik, en son Google Cloud Run ile amerikadan çağırıyoruz.
-        if (preg_match('#value="(https://www.google.com/maps/dir/.+?)">#', $response->body(), $match)) {
+        if (preg_match('#value="(https://www\.google\.[^/]+/maps/dir/.+?)">#', $response->body(), $match)) {
             return $match[1];
         }
         // CloudRun'dan gelince CAPTCHA çıkartıyor.
-        if (preg_match('#<title>(https://www.google.com/maps/dir/.+?)</title>#', $response->body(), $match)) {
+        if (preg_match('#<title>(https://www\.google\.[^/]+/maps/dir/.+?)</title>#', $response->body(), $match)) {
             return $match[1];
         }
 
